@@ -228,28 +228,7 @@ body[data-theme="green"] .frameOption.selected{border-color:#42d982;box-shadow:0
 .aboutCloseBtn{width:100%;margin-top:16px;padding:13px;border:0;border-radius:15px;background:linear-gradient(135deg,#ff8a3d,#ff526b);color:#fff;font-weight:900;font-size:14px;cursor:pointer;box-shadow:0 9px 25px rgba(255,82,78,.22)}
 </style>
 
-<style id="visual-max-pack">
-/* MAX VISUAL REFRESH */
-:root{--visual-glass:rgba(255,255,255,.055);--visual-border:rgba(255,255,255,.10);--visual-shadow:0 18px 50px rgba(0,0,0,.28)}
-body{background:radial-gradient(900px 500px at 50% -10%,color-mix(in srgb,var(--accent,#ff8a00) 18%,transparent),transparent 65%),#07080c!important}
-.app,.container{background:transparent!important}
-.card,.panel,.hero,.stat,.quest,.shop-item,.game-card,.achievement,.profile-card,.settings-card{border:1px solid var(--visual-border)!important;background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025))!important;box-shadow:var(--visual-shadow)!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
-.hero{position:relative;overflow:hidden;border-radius:28px!important;padding:24px!important;background:radial-gradient(circle at 82% 18%,color-mix(in srgb,var(--accent,#ff8a00) 25%,transparent),transparent 35%),linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.025))!important}
-.hero:before{content:"";position:absolute;inset:-45%;background:conic-gradient(from 180deg,transparent 0 62%,color-mix(in srgb,var(--accent,#ff8a00) 13%,transparent),transparent 76%);animation:ogSpin 18s linear infinite;pointer-events:none}
-.hero>*{position:relative;z-index:1}
-button{border-radius:16px!important;transition:transform .18s ease,filter .18s ease,box-shadow .18s ease!important}
-button:active{transform:scale(.96)!important}
-button:hover{filter:brightness(1.08);box-shadow:0 10px 28px rgba(0,0,0,.20)}
-.nav{background:rgba(10,11,16,.82)!important;border:1px solid rgba(255,255,255,.09)!important;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:0 -12px 40px rgba(0,0,0,.24)!important}
-.nav button{border-radius:18px!important}
-.fire,.streak-fire{filter:drop-shadow(0 0 16px color-mix(in srgb,var(--accent,#ff8a00) 65%,transparent));animation:ogPulse 2.4s ease-in-out infinite}
-.progress,.xp-bar{overflow:hidden!important;background:rgba(255,255,255,.08)!important;border:1px solid rgba(255,255,255,.07)}
-.progress>* ,.xp-fill{box-shadow:0 0 18px color-mix(in srgb,var(--accent,#ff8a00) 45%,transparent)}
-@keyframes ogPulse{50%{transform:scale(1.045);filter:drop-shadow(0 0 24px color-mix(in srgb,var(--accent,#ff8a00) 80%,transparent))}}
-@keyframes ogSpin{to{transform:rotate(360deg)}}
-@media(max-width:600px){.card,.panel,.quest,.shop-item,.game-card,.achievement,.profile-card,.settings-card{border-radius:22px!important}.hero{border-radius:26px!important}.nav{border-radius:22px 22px 0 0!important}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
-</style>
+
 
 <style id="visual-max-v2">
 :root{--glass:rgba(255,255,255,.075);--glass2:rgba(255,255,255,.045);--line:rgba(255,255,255,.12);--shadow:0 18px 55px rgba(0,0,0,.28)}
@@ -285,6 +264,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:color-mix(in s
 <main>
 <section id="home" class="page active">
 <div class="hero"><div class="heroTop"><span>🔥 ТЕКУЩАЯ СЕРИЯ</span><span class="rank" id="rank">Новичок</span></div><div class="fire" id="fire">🔥</div><div class="num" id="streak">0</div><div class="label">дней подряд</div><div class="xpLine"><div class="xpMeta"><span id="levelText">Уровень 1</span><span id="xpText">0 / 100 XP</span></div><div class="bar"><i id="xpBar" style="width:0%"></i></div></div><div class="buttons"><button class="btn yes" onclick="mark(true)">✓ Я пошёл сегодня</button><button class="btn no" onclick="mark(false)">× Не пошёл</button></div><div class="weekendBox" id="weekendBox"><strong>😴 Выходной!</strong><span>Сегодня отмечаться не нужно — серия сохранена 🔥</span></div><button class="restore" id="restore" onclick="restoreStreak()">🛟 Восстановить серию · 3</button></div>
+<button class="wheelPromo" id="wheelPromo" onclick="go('wheel',null)"><span class="wpIcon">🎡</span><span class="wpText"><b>Колесо фортуны</b><small id="wheelPromoSub">Крути раз в день и забирай награду</small></span><span class="wpTag" id="wheelPromoTag">Крутить</span></button>
 <div class="miniStats"><div class="mini"><b id="best">0</b><span>РЕКОРД</span></div><div class="mini"><b id="visits">0</b><span>ПОСЕЩЕНИЙ</span></div><div class="mini"><b class="coin" id="coins">0</b><span>МОНЕТ</span></div></div>
 <div class="sectionHead"><h2>⚔️ Сегодняшний квест</h2><span id="questCount">0/3</span></div><div class="card" id="dailyQuest"></div>
 <div class="sectionHead"><h2>🍂 Сезон</h2><span id="seasonDates">3 месяца</span></div><div class="card seasonCard season-autumn" id="seasonCard"><div class="seasonTop"><div class="seasonIcon" id="seasonIcon">🍂</div><div class="seasonInfo"><b id="seasonName">Осень</b><span id="seasonSubtitle">Сезонный прогресс</span></div><div class="seasonLevel"><b id="seasonLevel">1</b><span>УРОВЕНЬ</span></div></div><div class="seasonMeta"><span id="seasonXPText">0 / 100 XP</span><span id="seasonNext">До уровня 2</span></div><div class="seasonBar"><i id="seasonBarFill"></i></div><div class="seasonReward"><div class="seasonRewardIcon" id="seasonRewardIcon">🎁</div><div><b id="seasonRewardTitle">Первая сезонная награда</b><span id="seasonRewardSub">Открывается на 10 уровне</span></div></div><div class="seasonRewards" id="seasonRewards"><div class="seasonRewardItem"><span class="srIcon">🎁</span><b>10 ур.</b><span>Награда</span></div><div class="seasonRewardItem"><span class="srIcon">💎</span><b>25 ур.</b><span>Награда</span></div><div class="seasonRewardItem"><span class="srIcon">👑</span><b>50 ур.</b><span>Главная награда</span></div></div></div>
@@ -333,7 +313,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:color-mix(in s
   <p class="small" style="text-align:center;margin:10px 0 0">Максимум 5 запусков в день. Тап по экрану = прыжок.</p>
 </div>
 <div class="card gamePanel hidden icePanel" id="icePanel" style="margin-top:10px">
-  <div class="iceTop"><div class="questRow"><div class="questIcon">🔥❄️</div><div><strong>Огонь или лёд</strong><small>30 секунд · 5 запусков в день</small></div></div><div class="iceBadge">+10 🪙 / 🔥</div></div>
+  <div class="iceTop"><div class="questRow"><div class="gameChoiceIcon iceChoiceIcon"><span class="iceChoiceFire">🔥</span><span class="iceChoiceSnow">❄️</span></div><div><strong>Огонь или лёд</strong><small>30 секунд · 5 запусков в день</small></div></div><div class="iceBadge">+10 🪙 / 🔥</div></div>
   <div class="iceStats"><div class="iceStat"><b id="iceScore">0</b><span>СЧЁТ</span></div><div class="iceStat"><b id="iceBest">0</b><span>РЕКОРД</span></div><div class="iceStat"><b id="iceLeft">5</b><span>ОСТАЛОСЬ</span></div></div>
   <div class="iceTimer"><i id="iceTimerFill"></i></div>
   <div class="iceArena" id="iceArena">
@@ -345,10 +325,13 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:color-mix(in s
 </div>
 </section>
 <section id="achievements" class="page"><div class="sectionHead"><h2>🏆 Ачивки</h2><span id="earnedCount">0/9</span></div><div class="card"><p class="small">Не просто ходи — собирай коллекцию. За серии открывай новые достижения и награды.</p><div class="achievementProgress" id="achievementProgress"></div><div class="badges" id="badges"></div></div></section>
-<section id="profile" class="page"><div class="sectionHead"><h2>👤 Профиль</h2><span>Твой прогресс</span></div><div class="card profileCard"><div class="avatar" id="avatar">🔥</div><div class="level" id="profileLevel">УРОВЕНЬ 1</div><div class="profileName" id="profileName">Огонёк</div><div class="profileSub" id="profileRank">Новичок · только начинаешь</div><div class="profileEdit"><button class="primary" onclick="changeName()">✏️ Изменить ник</button><button onclick="document.getElementById('avatarInput').click()">🖼️ Поставить аву</button></div><input id="avatarInput" type="file" accept="image/*" hidden onchange="changeAvatar(event)"><div class="framePicker" style="margin-top:16px"><button class="framePickerHead" id="framePickerHead" onclick="toggleFrames()"><span>🖼️ Рамка аватара</span><span class="arrow">▼</span></button><div class="frameOptions" id="frameOptions"></div></div><div class="framePicker" style="margin-top:10px"><button class="framePickerHead" id="neonPickerHead" onclick="toggleNeons()"><span>✨ Неон профиля</span><span class="arrow">▼</span></button><div class="neonPicker" id="neonOptions"></div></div><div class="framePicker" style="margin-top:10px"><button class="framePickerHead" id="bannerPickerHead" onclick="toggleBanners()"><span>🎨 Баннер профиля</span><span class="arrow">▼</span></button><div class="frameOptions" id="bannerOptions"></div><div class="bannerUploadRow"><button class="profileEditBtn" onclick="document.getElementById('bannerInput').click()">🖼️ Свой баннер</button><button class="profileEditBtn" id="removeBannerBtn" onclick="removeCustomBanner()">🗑️ Убрать</button></div><input id="bannerInput" type="file" accept="image/*" hidden onchange="changeBanner(event)"><p class="customBannerHint">Картинка будет размещена за аватаром с мягким блюром и затемнением.</p></div><div class="profileStats"><div><b id="pBest">0</b><span>РЕКОРД</span></div><div><b id="pVisits">0</b><span>ДНЕЙ</span></div><div><b id="pBadges">0</b><span>АЧИВОК</span></div></div><div class="profileStatsMore"><div class="profileStatBox"><b id="pStreak">0</b><span>СЕРИЯ</span></div><div class="profileStatBox"><b id="pRescues">0</b><span>СПАСЕНИЙ</span></div><div class="profileStatBox"><b id="pXP">0</b><span>XP</span></div><div class="profileStatBox"><b id="pCoins">0</b><span>МОНЕТ</span></div></div><div class="sectionHead" style="margin-top:14px"><h2>🏷️ Титул</h2><span id="currentTitleLabel">Новичок</span></div><div class="card"><div class="titlePicker" id="titlePicker"></div></div><div class="sectionHead"><h2>📈 Уровень</h2><span id="profileXP">0 XP</span></div><div class="card"><div class="xpMeta"><span id="profileNext">До уровня 2</span><span id="profileXPNeed">100 XP</span></div><div class="bar" style="margin-top:6px"><i id="profileBar" style="width:0%"></i></div></div><div class="sectionHead"><h2>✨ Идеи для прокачки</h2></div><div class="card"><div class="setting"><div class="sicon">🔥</div><div><b>Серия и страховка</b><p>Новые награды за серии и поздравления за важные достижения.</p></div></div><div class="setting"><div class="sicon">🎯</div><div><b>Предметные квесты</b><p>Ежедневные задания и цели, которые уже доступны в разделе «Квесты».</p></div></div><div class="setting"><div class="sicon">🏅</div><div><b>Лиги</b><p>Развитие системы лиг — одна из будущих идей приложения.</p></div></div><div class="setting"><div class="sicon">🎁</div><div><b>Ежедневный бонус</b><p>Дополнительные ежедневные награды можно будет добавить позже.</p></div></div></div></section>
+<section id="profile" class="page"><div class="sectionHead"><h2>👤 Профиль</h2><span>Твой прогресс</span></div><div class="card profileCard"><div class="avatar" id="avatar">🔥</div><div class="level" id="profileLevel">УРОВЕНЬ 1</div><div class="profileName" id="profileName">Огонёк</div><div class="profileSub" id="profileRank">Новичок · только начинаешь</div><div class="profileEdit"><button class="primary" onclick="changeName()">✏️ Изменить ник</button><button onclick="document.getElementById('avatarInput').click()">🖼️ Поставить аву</button></div><input id="avatarInput" type="file" accept="image/*" hidden onchange="changeAvatar(event)"><div class="framePicker" style="margin-top:16px"><button class="framePickerHead" id="framePickerHead" onclick="toggleFrames()"><span>🖼️ Рамка аватара</span><span class="arrow">▼</span></button><div class="frameOptions" id="frameOptions"></div></div><div class="framePicker" style="margin-top:10px"><button class="framePickerHead" id="neonPickerHead" onclick="toggleNeons()"><span>✨ Неон профиля</span><span class="arrow">▼</span></button><div class="neonPicker" id="neonOptions"></div></div><div class="framePicker" style="margin-top:10px"><button class="framePickerHead" id="bannerPickerHead" onclick="toggleBanners()"><span>🎨 Баннер профиля</span><span class="arrow">▼</span></button><div class="frameOptions" id="bannerOptions"></div><div class="bannerUploadRow"><button class="profileEditBtn" onclick="document.getElementById('bannerInput').click()">🖼️ Свой баннер</button><button class="profileEditBtn" id="removeBannerBtn" onclick="removeCustomBanner()">🗑️ Убрать</button></div><input id="bannerInput" type="file" accept="image/*" hidden onchange="changeBanner(event)"><p class="customBannerHint">Картинка будет размещена за аватаром с мягким блюром и затемнением.</p></div><div class="profileStats"><div><b id="pBest">0</b><span>РЕКОРД</span></div><div><b id="pVisits">0</b><span>ДНЕЙ</span></div><div><b id="pBadges">0</b><span>АЧИВОК</span></div></div><div class="profileStatsMore"><div class="profileStatBox"><b id="pStreak">0</b><span>СЕРИЯ</span></div><div class="profileStatBox"><b id="pRescues">0</b><span>СПАСЕНИЙ</span></div><div class="profileStatBox"><b id="pXP">0</b><span>XP</span></div><div class="profileStatBox"><b id="pCoins">0</b><span>МОНЕТ</span></div></div><div class="sectionHead" style="margin-top:14px"><h2>🏷️ Титул</h2><span id="currentTitleLabel">Новичок</span></div><div class="card"><div class="titlePicker" id="titlePicker"></div></div><div class="sectionHead"><h2>📈 Уровень</h2><span id="profileXP">0 XP</span></div><div class="card"><div class="xpMeta"><span id="profileNext">До уровня 2</span><span id="profileXPNeed">100 XP</span></div><div class="bar" style="margin-top:6px"><i id="profileBar" style="width:0%"></i></div></div><div class="sectionHead"><h2>📊 Статистика</h2><span id="statsHint">по неделям</span></div>
+<div class="card"><div class="statTabs"><button class="on" id="stW" onclick="statMode('w')">Недели</button><button id="stM" onclick="statMode('m')">Месяцы</button></div><div class="statChart" id="statChart"></div><div class="statTiles" id="statTiles"></div></div>
+<div class="sectionHead"><h2>✨ Идеи для прокачки</h2></div><div class="card"><div class="setting"><div class="sicon">🔥</div><div><b>Серия и страховка</b><p>Новые награды за серии и поздравления за важные достижения.</p></div></div><div class="setting"><div class="sicon">🎯</div><div><b>Предметные квесты</b><p>Ежедневные задания и цели, которые уже доступны в разделе «Квесты».</p></div></div><div class="setting"><div class="sicon">🏅</div><div><b>Лиги</b><p>Развитие системы лиг — одна из будущих идей приложения.</p></div></div><div class="setting"><div class="sicon">🎁</div><div><b>Ежедневный бонус</b><p>Дополнительные ежедневные награды можно будет добавить позже.</p></div></div></div></section>
 
 <section id="wheel" class="page">
 <div class="sectionHead"><h2>🎡 Ежедневное колесо</h2><span>1 раз в день</span></div>
+<button class="backHome" onclick="go('home',document.querySelector('.navBtn'))">← На главную</button>
 <div class="card wheelCard">
   <p class="small">Заходи каждый день и крути колесо один раз. Здесь собраны награды из текущего магазина.</p>
   <div class="wheelWrap">
@@ -363,11 +346,14 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:color-mix(in s
 <div class="sectionHead"><h2>💎 Секретный шанс</h2><span>0,1%</span></div>
 <div class="card"><div class="questRow"><div class="questIcon">👑</div><div><strong>Мамкин бизнесмен</strong><small>Ультраредкий титул для профиля</small></div><div class="pill wheelRare">0,1%</div></div></div><div class="card"><div class="questRow"><div class="questIcon">✨</div><div><strong>Создать собственный титул</strong><small>Если выпадет — сам придумываешь название титула</small></div><div class="pill wheelRare">0,1%</div></div></div>
 </section>
+<section id="event" class="page"><div class="sectionHead"><h2>🎉 Ивент</h2><span>Скоро</span></div>
+<div class="card eventCard"><div class="evIcon">🎉</div><h3>Скоро…</h3><p class="small">Мы готовим первый ивент: особые задания, редкие награды и общий зачёт. Заглядывай почаще — всё начнётся неожиданно!</p><div class="evDots"><i></i><i></i><i></i></div></div>
+<div class="card" style="margin-top:10px"><div class="setting"><div class="sicon">🏆</div><div><b>Особые награды</b><p>Доступны только на время ивента</p></div><strong>🔒</strong></div><div class="setting"><div class="sicon">⚡</div><div><b>Ивент-задания</b><p>Новые испытания каждый день</p></div><strong>🔒</strong></div><div class="setting"><div class="sicon">🥇</div><div><b>Общий зачёт</b><p>Соревнуйся с друзьями</p></div><strong>🔒</strong></div></div></section>
 <section id="settings" class="page"><div class="sectionHead"><h2>⚙️ Настройки</h2></div>
 <div class="sectionHead"><h2>🎨 Внешний вид</h2><span>Тема приложения</span></div>
 <div class="card"><button class="themePickerHead" id="themePickerHead" onclick="toggleThemes()"><span>🎨 Тема приложения</span><span class="arrow">▼</span></button><div class="themePicker" id="themePicker"></div></div>
 <div class="card" style="margin-bottom:12px"><div class="setting" style="padding-bottom:10px"><div class="sicon">🎟️</div><div><b>Промокод</b><p>Введи промокод для получения бонуса</p></div></div><div style="display:flex;gap:8px;margin-top:4px"><input id="promoCode" type="text" placeholder="Введите промокод" autocomplete="off" style="flex:1;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card2);color:var(--text);outline:none"><button class="btn primary promoSubmit" onclick="applyPromo()">Ввести</button></div></div>
-<div class="card"><div class="setting"><div class="sicon">🔔</div><div><b>Напоминания</b><p>Не забывать отмечаться каждый день</p></div><div class="toggle on" id="notifyToggle" onclick="toggleNotify()"><i></i></div></div><div class="setting"><div class="sicon">🎮</div><div><b>Игровые эффекты</b><p>Конфетти и анимации за достижения</p></div><div class="toggle on" id="fxToggle" onclick="toggleFx()"><i></i></div></div><div class="setting"><div class="sicon">🔊</div><div><b>Звуки</b><p>Звуковые сигналы при важных событиях</p></div><div class="toggle on" id="soundToggle" onclick="toggleSound()"><i></i></div></div><div class="setting"><div class="sicon">📳</div><div><b>Вибрация</b><p>Лёгкая вибрация при нажатиях и наградах</p></div><div class="toggle on" id="vibrationToggle" onclick="toggleVibration()"><i></i></div></div><div class="setting"><div class="sicon">🛟</div><div><b>Восстановления</b><p>Три спасения серии каждый месяц</p></div><strong>3/мес.</strong></div><div class="setting" onclick="openAbout()" style="cursor:pointer"><div class="sicon">ℹ️</div><div style="flex:1"><b>О приложении</b><p>Учебный огонёк · v5</p></div><strong style="font-size:18px">›</strong></div></div><div class="sectionHead"><h2>🛠️ Разработка</h2><span>Только для тестов</span></div>
+<div class="card"><div class="setting"><div class="sicon">🔔</div><div><b>Напоминания</b><p>Уведомление, если ты ещё не отметился</p></div><div class="toggle on" id="notifyToggle" onclick="toggleNotify()"><i></i></div></div><div class="setting" id="remRow" style="display:none"><div class="sicon">⏰</div><div style="flex:1"><b>Время напоминания</b><p id="remHint">Только в учебные дни, если не отметился</p></div><input type="time" id="remTime" value="17:00" style="color-scheme:dark;width:96px;padding:9px 8px;border-radius:12px;border:1px solid var(--line);background:#0b0c11;color:#fff;font-family:inherit;font-weight:800"><button class="btn no" id="remTest" style="padding:9px 11px;font-size:11px;border-radius:12px;margin-left:8px">Проверить</button></div><div class="setting"><div class="sicon">🎮</div><div><b>Игровые эффекты</b><p>Конфетти и анимации за достижения</p></div><div class="toggle on" id="fxToggle" onclick="toggleFx()"><i></i></div></div><div class="setting"><div class="sicon">🔊</div><div><b>Звуки</b><p>Звуковые сигналы при важных событиях</p></div><div class="toggle on" id="soundToggle" onclick="toggleSound()"><i></i></div></div><div class="setting"><div class="sicon">🎵</div><div><b>Музыка</b><p>Спокойная фоновая мелодия</p></div><div class="toggle" id="musicToggle" onclick="toggleMusic()"><i></i></div></div><div class="setting" id="musicVolRow"><div class="sicon">🔉</div><div style="flex:1"><b>Громкость музыки</b><input type="range" id="musicVol" min="0" max="100" value="25" style="width:100%;margin-top:6px;accent-color:var(--orange)"></div></div><div class="setting" id="installRow" onclick="installApp()" style="cursor:pointer"><div class="sicon">📲</div><div style="flex:1"><b>Установить приложение</b><p>Как настоящее приложение, без браузера</p></div><strong style="font-size:18px;color:var(--muted)">›</strong></div><div class="setting" onclick="openOnb()" style="cursor:pointer"><div class="sicon">🎓</div><div style="flex:1"><b>Обучение</b><p>Показать краткий гид по приложению</p></div><strong style="font-size:18px;color:var(--muted)">›</strong></div><div class="setting"><div class="sicon">📳</div><div><b>Вибрация</b><p>Лёгкая вибрация при нажатиях и наградах</p></div><div class="toggle on" id="vibrationToggle" onclick="toggleVibration()"><i></i></div></div><div class="setting"><div class="sicon">🛟</div><div><b>Восстановления</b><p>Три спасения серии каждый месяц</p></div><strong>3/мес.</strong></div><div class="setting" onclick="openAbout()" style="cursor:pointer"><div class="sicon">ℹ️</div><div style="flex:1"><b>О приложении</b><p>Учебный огонёк · v6</p></div><strong style="font-size:18px">›</strong></div></div><div class="sectionHead"><h2>🛠️ Разработка</h2><span>Только для тестов</span></div>
 <div class="card devAccess" id="devAccess">
   <div class="setting"><div class="sicon">🔐</div><div><b>Панель разработчика</b><p>Введи код, чтобы открыть тестовые инструменты.</p></div></div>
   <div style="display:flex;gap:8px;margin-top:12px"><input id="devCode" type="password" inputmode="text" placeholder="Код разработчика" style="flex:1;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card2);color:var(--text);outline:none"><button class="btn primary" onclick="unlockDev()">Войти</button></div>
@@ -417,7 +403,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:color-mix(in s
 </div>
 <div class="sectionHead"><h2>🗑️ Данные</h2></div><div class="card"><button class="btn no" style="width:100%" onclick="resetData()">Сбросить прогресс</button><p class="small" style="margin:10px 3px 0">Все данные хранятся локально на этом устройстве.</p></div></section>
 </main></div>
-<nav class="nav"><div class="navInner"><button class="navBtn active" onclick="go('home',this)"><span class="ni">🏠</span>Главная</button><button class="navBtn" onclick="go('quests',this)"><span class="ni">⚔️</span>Квесты</button><button class="navBtn" onclick="go('games',this)"><span class="ni">🎮</span>Игры</button><button class="navBtn" onclick="go('achievements',this)"><span class="ni">🏆</span>Ачивки</button><button class="navBtn" onclick="go('profile',this)"><span class="ni">👤</span>Профиль</button><button class="navBtn" onclick="go('wheel',this)"><span class="ni">🎡</span>Колесо</button><button class="navBtn" onclick="go('settings',this)"><span class="ni">⚙️</span>Ещё</button></div></nav><div class="toast" id="toast"></div><div class="confetti" id="confetti"></div>
+<nav class="nav"><div class="navInner"><button class="navBtn active" onclick="go('home',this)"><span class="ni">🏠</span>Главная</button><button class="navBtn" onclick="go('quests',this)"><span class="ni">⚔️</span>Квесты</button><button class="navBtn" onclick="go('games',this)"><span class="ni">🎮</span>Игры</button><button class="navBtn" onclick="go('achievements',this)"><span class="ni">🏆</span>Ачивки</button><button class="navBtn" onclick="go('profile',this)"><span class="ni">👤</span>Профиль</button><button class="navBtn" onclick="go('event',this)"><span class="ni">🎉</span>Ивент</button><button class="navBtn" onclick="go('settings',this)"><span class="ni">⚙️</span>Ещё</button></div></nav><div class="toast" id="toast"></div><div class="confetti" id="confetti"></div>
 <script>
 const KEY='ogonok_v3';const old=localStorage.getItem('ogonok_v2')||localStorage.getItem('ogonok_v1');let data=JSON.parse(localStorage.getItem(KEY)||old||'null')||{days:{},streak:0,best:0,restores:3,restoreMonth:'',xp:0,level:1,coins:0,quests:{},claimed:{},fx:true,notify:true,theme:'default',fireStyle:'classic',freezes:0,goldTickets:0,inventory:{boost:0,shield:0,freeze:0},boostTokens:0,purchaseBusy:false,purchaseReceipts:[],neonProfile:false,neonRedProfile:false,neonGreenProfile:false,neonBlueProfile:false,neonPinkProfile:false,neonProfileColor:'cyan',neonDailyDate:'',neonDailyId:'',customTitleUnlocked:false,customTitle:'',banner:'none',seasonId:'',seasonXP:0,seasonClaimed:{},seasonPackWeek:'',seasonPackBuys:0};
 if(!data.inventory||typeof data.inventory!=='object')data.inventory={boost:0,shield:0,freeze:0};data.purchaseBusy=false;if(!Array.isArray(data.purchaseReceipts))data.purchaseReceipts=[];if(data.boostTokens==null)data.boostTokens=Number(data.inventory.boost)||0;if(data.gameDailyBestDate==null)data.gameDailyBestDate='';if(data.gameDailyBest==null)data.gameDailyBest=0;if(data.gameDailyPipesDate==null)data.gameDailyPipesDate='';if(data.gameDailyPipes==null)data.gameDailyPipes=0;if(data.questDayOverride===undefined)data.questDayOverride='';if(data.questDayOverrideDate===undefined)data.questDayOverrideDate='';if(data.shopIntervalHours==null)data.shopIntervalHours=24;if(data.shopUpdatedAt==null)data.shopUpdatedAt=Date.now();if(data.xp==null)data.xp=0;if(data.gameBest==null)data.gameBest=0;if(data.gamePlaysDate==null)data.gamePlaysDate='';if(data.gamePlays==null)data.gamePlays=0;if(data.gameBonusAttempts==null)data.gameBonusAttempts=0;if(data.icePlaysDate==null)data.icePlaysDate='';if(data.icePlays==null)data.icePlays=0;if(data.iceBonusAttempts==null)data.iceBonusAttempts=0;if(data.iceBest==null)data.iceBest=0;if(!data.wheel||typeof data.wheel!=='object')data.wheel={};if(data.wheel.last===undefined)data.wheel.last='';if(data.wheel.busy===undefined)data.wheel.busy=false;if(data.freezes==null)data.freezes=0;if(data.goldTickets==null)data.goldTickets=0;if(data.neonProfile==null)data.neonProfile=false;if(data.neonRedProfile==null)data.neonRedProfile=false;if(data.neonGreenProfile==null)data.neonGreenProfile=false;if(data.neonBlueProfile==null)data.neonBlueProfile=false;if(data.neonPinkProfile==null)data.neonPinkProfile=false;if(data.neonProfileColor==null)data.neonProfileColor='cyan';if(data.customTitle==null)data.customTitle='';if(data.neonDailyDate==null)data.neonDailyDate='';if(data.neonDailyId==null)data.neonDailyId='';if(data.banner==null)data.banner='none';if(data.bannerImage==null)data.bannerImage='';if(!Array.isArray(data.seasonUnlockedFrames))data.seasonUnlockedFrames=[];if(!Array.isArray(data.seasonUnlockedBanners))data.seasonUnlockedBanners=[];if(data.avatarFrame==null)data.avatarFrame='none';if(data.name==null)data.name='Огонёк';if(data.avatar==null)data.avatar='';if(data.level==null)data.level=1;if(data.coins==null)data.coins=0;if(!data.quests)data.quests={};if(!data.claimed)data.claimed={};if(data.fx==null)data.fx=true;if(data.notify==null)data.notify=true;if(data.sound==null)data.sound=true;if(data.vibration==null)data.vibration=true;if(data.frame==null)data.frame='';if(data.rescuesUsed==null)data.rescuesUsed=0;if(!Array.isArray(data.titles))data.titles=['Новичок'];if(!data.title)data.title='Новичок';
@@ -903,15 +889,15 @@ if(localStorage.getItem('ogonok_dev')==='1'){document.getElementById('devAccess'
     <div class="aboutBody">
       <div class="aboutDates">
         <div class="aboutDate"><span>Дата релиза</span><b>06.10.2026</b></div>
-        <div class="aboutDate"><span>Последний апдейт</span><b>07.10.2026</b></div>
+        <div class="aboutDate"><span>Последний апдейт</span><b>21.10.2026</b></div>
       </div>
       <div class="aboutUpdate">
         <div class="aboutUpdateHead">🚀 Что добавили в апдейте</div>
-        <div class="aboutItem"><span>🎡</span><span>Колесо фортуны с уникальными наградами</span></div>
-        <div class="aboutItem"><span>🔥</span><span>Новую игру «Огонь Ап»</span></div>
-        <div class="aboutItem"><span>🍂</span><span>Сезонную систему с уникальными наградами</span></div>
-        <div class="aboutItem"><span>🖼️</span><span>Баннеры профиля для персонализации</span></div>
-      </div>
+        <div class="aboutItem"><span>📊</span><span>Статистику: графики по неделям и месяцам</span></div>
+        <div class="aboutItem"><span>🎓</span><span>Обучение для новых пользователей</span></div>
+        <div class="aboutItem"><span>🎵</span><span>Фоновую музыку и новые звуки</span></div>
+        <div class="aboutItem"><span>🎉</span><span>Раздел «Ивент», колесо теперь на главной</span></div>
+        </div>
       <button class="aboutCloseBtn" onclick="closeAbout()">Понятно 🔥</button>
     </div>
   </div>
@@ -920,4 +906,553 @@ if(localStorage.getItem('ogonok_dev')==='1'){document.getElementById('devAccess'
 function openAbout(){document.getElementById('aboutModal').classList.add('open')}
 function closeAbout(){document.getElementById('aboutModal').classList.remove('open')}
 </script>
-<div class="customTitleModal" id="customTitleModal" onclick="if(event.target===this)closeCustomTitle()"><div class="customTitleBox"><div class="customTitleIcon">✨</div><h2>Собственный титул!</h2><p>Тебе невероятно повезло — выпал секретный шанс 0,1%. Придумай себе уникальный титул.</p><input class="customTitleInput" id="customTitleInput" maxlength="24" placeholder="Например: Повелитель огонька" autocomplete="off" onkeydown="if(event.key==='Enter')confirmCustomTitle()"><div class="customTitleHint">2–24 символа · титул будет установлен в профиль</div><div class="customTitleActions"><button class="btn" onclick="closeCustomTitle()">Позже</button><button class="primary" onclick="confirmCustomTitle()">✨ Создать титул</button></div></div></div><div class="milestoneModal" id="milestoneModal"><div class="milestoneBox"><div class="milestoneIcon" id="milestoneIcon">🔥</div><h2 id="milestoneTitle">Серия 7 дней!</h2><p id="milestoneText">Ты достиг важной вехи.</p><div class="card" style="margin-bottom:14px"><b id="milestoneReward">+50 XP · +25 🪙</b></div><button class="primary" onclick="closeMilestone()">Продолжить 🔥</button></div></div><div class="purchaseModal" id="purchaseModal"><div class="purchaseBox"><div class="purchaseIcon" id="purchaseIcon">🛍️</div><h2 id="purchaseTitle">Покупка</h2><div class="purchasePrice" id="purchasePrice">0 🪙</div><p class="purchaseDesc" id="purchaseDesc">Подтвердить покупку?</p><div class="purchaseBalance" id="purchaseBalance"></div><div class="purchaseActions"><button class="btn" onclick="closePurchase()">Отмена</button><button class="primary" onclick="confirmPurchase()">Купить</button></div></div></div><div class="caseModal" id="caseModal"><div class="caseBox"><h2>🎁 Кейс «Огонёк»</h2><p id="caseStatus">Открываем кейс...</p><div class="caseReel"><div class="casePointer"></div><div class="caseTrack" id="caseTrack"></div></div><div class="caseResult" id="caseResult"></div><button class="primary caseBtn" id="caseClose" onclick="closeCase()" disabled>Забрать награду</button><div class="caseHint">Награда выбирается случайно. После покупки кейс сразу открывается.</div></div></div></body></html>
+<div class="customTitleModal" id="customTitleModal" onclick="if(event.target===this)closeCustomTitle()"><div class="customTitleBox"><div class="customTitleIcon">✨</div><h2>Собственный титул!</h2><p>Тебе невероятно повезло — выпал секретный шанс 0,1%. Придумай себе уникальный титул.</p><input class="customTitleInput" id="customTitleInput" maxlength="24" placeholder="Например: Повелитель огонька" autocomplete="off" onkeydown="if(event.key==='Enter')confirmCustomTitle()"><div class="customTitleHint">2–24 символа · титул будет установлен в профиль</div><div class="customTitleActions"><button class="btn" onclick="closeCustomTitle()">Позже</button><button class="primary" onclick="confirmCustomTitle()">✨ Создать титул</button></div></div></div><div class="milestoneModal" id="milestoneModal"><div class="milestoneBox"><div class="milestoneIcon" id="milestoneIcon">🔥</div><h2 id="milestoneTitle">Серия 7 дней!</h2><p id="milestoneText">Ты достиг важной вехи.</p><div class="card" style="margin-bottom:14px"><b id="milestoneReward">+50 XP · +25 🪙</b></div><button class="primary" onclick="closeMilestone()">Продолжить 🔥</button></div></div><div class="purchaseModal" id="purchaseModal"><div class="purchaseBox"><div class="purchaseIcon" id="purchaseIcon">🛍️</div><h2 id="purchaseTitle">Покупка</h2><div class="purchasePrice" id="purchasePrice">0 🪙</div><p class="purchaseDesc" id="purchaseDesc">Подтвердить покупку?</p><div class="purchaseBalance" id="purchaseBalance"></div><div class="purchaseActions"><button class="btn" onclick="closePurchase()">Отмена</button><button class="primary" onclick="confirmPurchase()">Купить</button></div></div></div><div class="caseModal" id="caseModal"><div class="caseBox"><h2>🎁 Кейс «Огонёк»</h2><p id="caseStatus">Открываем кейс...</p><div class="caseReel"><div class="casePointer"></div><div class="caseTrack" id="caseTrack"></div></div><div class="caseResult" id="caseResult"></div><button class="primary caseBtn" id="caseClose" onclick="closeCase()" disabled>Забрать награду</button><div class="caseHint">Награда выбирается случайно. После покупки кейс сразу открывается.</div></div></div>
+<!-- ===== UI+ слой: анимации и оптимизация (поверх основного кода, логика приложения не тронута) ===== -->
+<style id="uiPlus">
+html{-webkit-tap-highlight-color:transparent}button,.reward,.gameChoice,.navBtn{touch-action:manipulation;-webkit-user-select:none;user-select:none}
+:root{--ease:cubic-bezier(.2,.8,.2,1);--spring:cubic-bezier(.34,1.56,.64,1)}
+/* переходы между страницами */
+.page.active{animation:none}
+/* фикс «съехавших» блоков */
+.card>.small:first-child{margin-top:0}
+.gameActions>.btn:only-child{grid-column:1/-1}
+.gameLimit:has(+.gamesMenu[style*="none"]){margin-bottom:0}
+.achievementProgress{margin-bottom:12px}
+.page.active>*{animation:itemIn .5s var(--ease) both}
+.page.active>*:nth-child(2){animation-delay:.04s}.page.active>*:nth-child(3){animation-delay:.08s}.page.active>*:nth-child(4){animation-delay:.12s}.page.active>*:nth-child(5){animation-delay:.16s}.page.active>*:nth-child(6){animation-delay:.2s}.page.active>*:nth-child(n+7){animation-delay:.24s}
+@keyframes itemIn{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+/* огонь и свечение */
+.hero .fire{display:block;margin-bottom:8px;transform-origin:50% 90%;animation:flame 1.8s ease-in-out infinite}
+@keyframes flame{0%,100%{transform:scale(1) rotate(-1.5deg)}25%{transform:scale(1.03,1.06) rotate(1.5deg)}50%{transform:scale(.98,1.04) rotate(-1deg)}75%{transform:scale(1.02,1.05) rotate(2deg)}}
+#fire.fire-pop{animation:firePop .55s var(--ease)}
+.hero:before{animation:glowPulse 3.4s ease-in-out infinite}
+@keyframes glowPulse{0%,100%{opacity:.14;transform:translateX(-50%) scale(1)}50%{opacity:.3;transform:translateX(-50%) scale(1.15)}}
+.num{background:linear-gradient(180deg,#fff 35%,var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 4px 18px color-mix(in srgb,var(--orange) 35%,transparent))}
+.ember{position:absolute;bottom:-10px;border-radius:50%;background:var(--orange);box-shadow:0 0 8px var(--orange);opacity:0;pointer-events:none;animation:ember var(--d,5s) linear var(--w,0s) infinite;will-change:transform,opacity}
+@keyframes ember{0%{transform:translate(0,0) scale(1);opacity:0}12%{opacity:.8}100%{transform:translate(var(--dx,0),-260px) scale(.2);opacity:0}}
+/* прогресс-бары */
+.bar i,.seasonBar i{position:relative;overflow:hidden}
+.bar i:after,.seasonBar i:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,#ffffff55 50%,transparent 70%);transform:translateX(-100%);animation:shine 2.6s ease-in-out infinite}
+@keyframes shine{60%,100%{transform:translateX(100%)}}
+.bar i,.seasonBar i{transition:width .8s var(--ease)}
+/* карточки, кнопки, нажатия */
+.card,.mini,.reward,.badge,.gameChoice,.titleOption,.themeOption,.frameOption{transition:transform .25s var(--ease),border-color .25s,box-shadow .25s,background .25s}
+.card,.mini{box-shadow:inset 0 1px 0 #ffffff0f}
+@media(hover:hover){.card:hover,.mini:hover,.badge:hover,.gameChoice:hover{border-color:#3d4150;transform:translateY(-2px)}.gameChoice:hover .gameChoiceArrow{transform:translateX(4px)}}
+.gameChoiceArrow{transition:transform .25s var(--ease)}
+.btn,.primary,.reward,.gameChoice,.navBtn{transition:transform .18s var(--ease),box-shadow .25s,filter .2s}
+.btn:active,.primary:active,.gameChoice:active,.reward:active{transform:scale(.96)}
+.yes{position:relative;overflow:hidden}.yes:before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,#ffffff40 50%,transparent 65%);transform:translateX(-120%);animation:btnShine 3.8s ease-in-out infinite}
+@keyframes btnShine{55%,100%{transform:translateX(120%)}}
+.rip{position:absolute;border-radius:50%;background:#ffffff55;transform:scale(0);animation:rip .55s ease-out forwards;pointer-events:none}
+@keyframes rip{to{transform:scale(1);opacity:0}}
+.btn,.primary{position:relative;overflow:hidden}
+/* календарь и ачивки */
+.day{transition:transform .2s var(--spring)}.day.ok{animation:dayIn .45s var(--spring) both;animation-delay:calc(var(--k,0)*18ms)}
+@keyframes dayIn{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:none}}
+.badge.earned .badgeIcon{animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-3px) rotate(-4deg)}}
+/* навигация */
+.navInner{backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%)}
+.navBtn.active{box-shadow:inset 0 1px 0 #ffffff14,0 4px 14px color-mix(in srgb,var(--orange) 22%,transparent)}
+.navBtn.active .ni{animation:niPop .45s var(--spring)}
+@keyframes niPop{0%{transform:scale(.7) translateY(3px)}100%{transform:none}}
+/* тост и модалки */
+.toast{transition:opacity .25s,transform .4s var(--spring);box-shadow:0 12px 34px #0009}
+.open>.aboutBox,.open>.milestoneBox,.open>.purchaseBox,.open>.caseBox,.open>.customTitleBox{animation:popIn .42s var(--spring)}
+@keyframes popIn{from{opacity:0;transform:translateY(24px) scale(.9)}to{opacity:1;transform:none}}
+.milestoneIcon,.aboutIcon,.purchaseIcon{animation:bob 2.4s ease-in-out infinite}
+/* экономия батареи: пауза анимаций в фоне */
+html.paused *,html.paused *:before,html.paused *:after{animation-play-state:paused!important}
+@media(prefers-reduced-motion:reduce){.page.active>*,.hero .fire,.hero:before,.ember,.yes:before,.bar i:after,.day.ok,.badge.earned .badgeIcon{animation:none!important}.ember{display:none}}
+</style>
+<script>
+(function(){
+'use strict';
+/* 1. Мгновенное переключение вкладок (раньше каждый раз показывался полноэкранный блюр-лоадер) */
+window.go=function(page,btn){
+  document.querySelectorAll('.page.active').forEach(function(x){x.classList.remove('active')});
+  var p=document.getElementById(page);if(p)p.classList.add('active');
+  document.querySelectorAll('.navBtn.active').forEach(function(x){x.classList.remove('active')});
+  if(btn)btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'auto'});
+  try{if(navigator.vibrate&&window.data&&data.vibration)navigator.vibrate(6)}catch(e){}
+};
+/* 2. Не перерисовываем магазин, пока вкладка в фоне */
+if(typeof window.shop==='function'){var _s=window.shop;window.shop=function(){if(document.hidden)return;return _s.apply(this,arguments)}}
+/* 3. Пауза анимаций, когда приложение свёрнуто */
+document.addEventListener('visibilitychange',function(){document.documentElement.classList.toggle('paused',document.hidden)});
+/* 4. Искры над огоньком */
+var hero=document.querySelector('.hero');
+if(hero&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  for(var i=0;i<12;i++){var e=document.createElement('i'),z=2+Math.random()*3;e.className='ember';
+    e.style.cssText='left:'+(8+Math.random()*84)+'%;width:'+z+'px;height:'+z+'px;--d:'+(4+Math.random()*4).toFixed(1)+'s;--w:-'+(Math.random()*6).toFixed(1)+'s;--dx:'+(Math.random()*60-30|0)+'px';
+    hero.insertBefore(e,hero.firstChild)}
+}
+/* 5. Ripple на кнопках */
+document.addEventListener('pointerdown',function(ev){
+  var b=ev.target.closest&&ev.target.closest('.btn,.primary');if(!b||b.disabled)return;
+  var r=b.getBoundingClientRect(),d=Math.max(r.width,r.height)*2,s=document.createElement('span');
+  s.className='rip';s.style.cssText='width:'+d+'px;height:'+d+'px;left:'+(ev.clientX-r.left-d/2)+'px;top:'+(ev.clientY-r.top-d/2)+'px';
+  b.appendChild(s);setTimeout(function(){s.remove()},600);
+},{passive:true});
+/* 6. Плавный счётчик чисел (серия, рекорд, монеты...) */
+function count(el){
+  var n=parseInt(el.textContent.replace(/\D/g,''),10);if(!isFinite(n))return;
+  var from=el._v;el._v=n;
+  if(el._busy||from===undefined||from===n)return;
+  el._busy=true;var t0=performance.now(),D=Math.min(900,300+Math.abs(n-from)*12);
+  (function step(t){var k=Math.min(1,(t-t0)/D),v=Math.round(from+(n-from)*(1-Math.pow(1-k,3)));
+    el.textContent=v;if(k<1)requestAnimationFrame(step);else{el.textContent=n;el._busy=false}})(t0);
+}
+['streak','best','visits','coins','coins2'].forEach(function(id){
+  var el=document.getElementById(id);if(!el)return;count(el);
+  new MutationObserver(function(){count(el)}).observe(el,{childList:true,characterData:true,subtree:true});
+});
+/* 7. Каскадное появление дней в календаре */
+var cal=document.getElementById('calendar');
+if(cal)new MutationObserver(function(){cal.querySelectorAll('.day.ok').forEach(function(d,i){d.style.setProperty('--k',i)})}).observe(cal,{childList:true});
+})();
+</script>
+
+<!-- ===== UI+ v2: колесо, кейсы, игры ===== -->
+<style id="uiPlus2">
+/* Колесо */
+.wheelWrap:before{content:"";position:absolute;inset:-14px;border-radius:50%;background:repeating-conic-gradient(var(--gold) 0 2deg,transparent 2deg 15deg);-webkit-mask:radial-gradient(circle,transparent 60%,#000 61%);mask:radial-gradient(circle,transparent 60%,#000 61%);opacity:.5;animation:lightsIdle 2.4s steps(2) infinite;pointer-events:none}
+.wheelWrap.spin:before{animation:lightsSpin .5s linear infinite;opacity:1}
+@keyframes lightsIdle{50%{opacity:.18}}@keyframes lightsSpin{to{transform:rotate(15deg)}}
+.wheel{transition:box-shadow .4s}.wheelWrap.spin .wheel{box-shadow:0 0 0 2px #11131a,0 0 40px color-mix(in srgb,var(--orange) 55%,transparent),0 18px 45px #000b}
+.wheelWrap.spin .wheelPointer{transform-origin:50% 0;animation:tick .09s linear infinite alternate}
+@keyframes tick{from{transform:translateX(-50%) rotate(-9deg)}to{transform:translateX(-50%) rotate(7deg)}}
+.wheelCenter{animation:bob 2.6s ease-in-out infinite}
+.wheelResult.pop,.caseResult.pop{animation:resPop .6s var(--spring)}
+@keyframes resPop{0%{opacity:0;transform:scale(.6)}60%{transform:scale(1.15)}100%{opacity:1;transform:none}}
+.wheelPrize{transition:transform .2s var(--ease),border-color .2s}.wheelPrize:active{transform:scale(.97)}
+/* Кейсы */
+.caseReel{box-shadow:inset 0 0 30px #000c,0 0 0 1px #ffffff08}
+.caseReel:before,.caseReel:after{box-shadow:0 0 14px var(--orange)}
+.caseReel .casePointer{animation:ptr 1s ease-in-out infinite}
+@keyframes ptr{50%{box-shadow:0 0 22px #fff,0 0 40px var(--orange)}}
+.caseReel.go .caseTrack{filter:blur(.7px)}
+.caseItem{position:relative;transition:transform .35s var(--spring),box-shadow .35s,border-color .35s}
+.caseItem.c{border-color:#6b5420;background:linear-gradient(160deg,#241d10,#171922)}.caseItem.x{border-color:#27466e;background:linear-gradient(160deg,#10203a,#171922)}
+.caseItem.big{box-shadow:0 0 14px #ffc44d44}.caseItem.x.big{box-shadow:0 0 14px #5aa9ff55}
+.caseItem.win{transform:scale(1.14);z-index:2;border-color:#fff;box-shadow:0 0 0 2px #ffffffaa,0 0 28px var(--orange);animation:winPulse 1s ease-in-out infinite}
+@keyframes winPulse{50%{box-shadow:0 0 0 2px #fff,0 0 44px var(--orange)}}
+.caseModal.open .caseTrack .caseItem{animation:itemIn .4s var(--ease) both}
+/* Огонь или лёд */
+.iceTarget:after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid currentColor;opacity:.5;animation:ring 1s ease-out infinite;pointer-events:none}
+.iceTarget.fire{color:#ffb347}.iceTarget.ice{color:#8fe0ff}
+@keyframes ring{from{transform:scale(.85);opacity:.7}to{transform:scale(1.35);opacity:0}}
+.iceTimer i{box-shadow:0 0 10px #ff650088}
+.iceArena.shake,.flappyWrap.shake{animation:shake .38s}
+@keyframes shake{20%{transform:translate(-6px,2px)}40%{transform:translate(5px,-3px)}60%{transform:translate(-4px,2px)}80%{transform:translate(3px,-1px)}}
+.iceArena.flash:after,.flappyWrap.flash:after{content:"";position:absolute;inset:0;background:#8fe0ff;opacity:0;animation:flash .4s ease-out;pointer-events:none;z-index:5}
+.flappyWrap.flash:after{background:#ff4d3a}
+@keyframes flash{0%{opacity:.45}100%{opacity:0}}
+.fx{position:absolute;pointer-events:none;border-radius:50%;z-index:3;animation:fx .6s ease-out forwards}
+@keyframes fx{to{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
+.floatTxt{position:absolute;pointer-events:none;z-index:3;font-weight:950;font-size:17px;color:#ffe08a;text-shadow:0 2px 8px #000;transform:translate(-50%,-50%);animation:floatUp .8s ease-out forwards}
+@keyframes floatUp{to{transform:translate(-50%,-90px);opacity:0}}
+.iceStat b.pop,.gameStat b.pop{animation:statPop .35s var(--spring)}
+@keyframes statPop{50%{transform:scale(1.35);color:var(--gold)}}
+.iceOverlay:not(.hidden) .iceMessage,.flappyOverlay:not(.hidden) .flappyMessage{animation:popIn .45s var(--spring)}
+@media(prefers-reduced-motion:reduce){.wheelWrap:before,.wheelCenter,.caseItem.win,.iceTarget:after,.casePointer{animation:none!important}}
+</style>
+<script>
+(function(){
+'use strict';
+var RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function $(id){return document.getElementById(id)}
+function once(el,c,ms){if(!el)return;el.classList.remove(c);void el.offsetWidth;el.classList.add(c);setTimeout(function(){el.classList.remove(c)},ms||600)}
+/* число-«поп» при изменении счёта */
+['iceScore','flappyScore'].forEach(function(id){var e=$(id);if(e)new MutationObserver(function(){once(e,'pop',380)}).observe(e,{childList:true,characterData:true,subtree:true})});
+/* Колесо: лампочки и тикающая стрелка во время вращения, поп результата */
+var wheel=$('dailyWheel'),wrap=wheel&&wheel.parentNode;
+if(wheel)new MutationObserver(function(){if(wheel.classList.contains('spinning')&&!wrap.classList.contains('spin')){wrap.classList.add('spin');setTimeout(function(){wrap.classList.remove('spin')},3300)}}).observe(wheel,{attributes:true,attributeFilter:['class']});
+var wr=$('wheelResult');if(wr)new MutationObserver(function(){if(/Выпал/.test(wr.textContent))once(wr,'pop')}).observe(wr,{childList:true,characterData:true,subtree:true});
+/* Кейс: цвета по типу награды, размытие при прокрутке, подсветка победителя */
+var tr=$('caseTrack'),cr=$('caseResult'),reel=tr&&tr.parentNode;
+if(tr)new MutationObserver(function(){
+  tr.querySelectorAll('.caseItem:not(.c):not(.x)').forEach(function(it){
+    var coin=it.textContent.indexOf('🪙')===0,n=parseInt((it.textContent.match(/\d+/)||[0])[0],10);
+    it.classList.add(coin?'c':'x');if(n>=150)it.classList.add('big')});
+  reel.classList.add('go');setTimeout(function(){reel.classList.remove('go')},2900);
+}).observe(tr,{childList:true});
+if(cr)new MutationObserver(function(){
+  if(/Выпало/.test(cr.textContent)){once(cr,'pop');var w=tr.children[19];if(w)w.classList.add('win')}
+  else if(tr)tr.querySelectorAll('.win').forEach(function(x){x.classList.remove('win')});
+}).observe(cr,{childList:true,characterData:true,subtree:true});
+/* частицы */
+function burst(box,x,y,colors,n){if(RM)return;for(var i=0;i<n;i++){var p=document.createElement('i'),a=Math.random()*6.28,d=30+Math.random()*50,z=4+Math.random()*5;
+  p.className='fx';p.style.cssText='left:'+x+'px;top:'+y+'px;width:'+z+'px;height:'+z+'px;background:'+colors[i%colors.length]+';--dx:'+(Math.cos(a)*d|0)+'px;--dy:'+(Math.sin(a)*d|0)+'px';
+  box.appendChild(p);setTimeout(function(){p.remove()},650)}}
+/* Огонь или лёд: обёртка над hitIceTarget */
+if(typeof window.hitIceTarget==='function'){var _h=window.hitIceTarget;
+  window.hitIceTarget=function(isFire,el){
+    var a=$('iceArena');
+    if(a&&el&&iceGame.running){var x=parseFloat(el.style.left),y=parseFloat(el.style.top);
+      if(isFire){burst(a,x,y,['#ff6500','#ffc44d','#fff'],12);
+        var t=document.createElement('div');t.className='floatTxt';t.textContent='+10 🪙'+(iceGame.combo>=2?' ×'+(iceGame.combo+1):'');t.style.left=x+'px';t.style.top=y+'px';a.appendChild(t);setTimeout(function(){t.remove()},850)}
+      else{burst(a,x,y,['#8fe0ff','#fff','#1c67ad'],14);once(a,'shake',400);once(a,'flash',420)}}
+    return _h.apply(this,arguments)}}
+/* Огонь Ап: хвост из искр, тряска и вспышка при проигрыше */
+var P=[];
+if(typeof window.flappyDraw==='function'){var _d=window.flappyDraw;
+  window.flappyDraw=function(){
+    _d.apply(this,arguments);
+    var c=$('flappyCanvas');if(!c||RM)return;var x=c.getContext('2d');
+    if(flappy.running&&P.length<40&&Math.random()<.8)P.push({x:flappy.bird.x-8,y:flappy.bird.y+Math.random()*8-4,vx:-1.6-Math.random(),vy:Math.random()*1.2-.6,l:1,r:2+Math.random()*3});
+    for(var i=P.length-1;i>=0;i--){var p=P[i];p.x+=p.vx;p.y+=p.vy;p.l-=.035;
+      if(p.l<=0){P.splice(i,1);continue}
+      x.globalAlpha=p.l;x.fillStyle=p.l>.55?'#ffc44d':'#ff5a1a';x.beginPath();x.arc(p.x,p.y,p.r*p.l,0,6.283);x.fill()}
+    x.globalAlpha=1}}
+if(typeof window.endFlappy==='function'){var _e=window.endFlappy;
+  window.endFlappy=function(){var was=flappy.running,w=document.querySelector('.flappyWrap');
+    if(was&&w){once(w,'shake',400);once(w,'flash',420)}P.length=0;return _e.apply(this,arguments)}}
+})();
+</script>
+
+<!-- ===== UI+ v3: статистика, обучение, музыка и звуки, ивент ===== -->
+<style id="uiPlus3">
+.wheelPromo{width:100%;display:flex;align-items:center;gap:12px;margin:12px 0 0;padding:13px 14px;border:1px solid color-mix(in srgb,var(--orange) 45%,#292c38);border-radius:20px;background:radial-gradient(circle at 12% 0,color-mix(in srgb,var(--orange) 22%,transparent),transparent 55%),linear-gradient(145deg,#1b1d27,#12131a);color:#fff;cursor:pointer;text-align:left;font-family:inherit;transition:transform .18s var(--ease)}
+.wheelPromo:active{transform:scale(.97)}.wpIcon{font-size:30px;animation:wspin 6s linear infinite}@keyframes wspin{to{transform:rotate(360deg)}}
+.wpText{flex:1;min-width:0}.wpText b{display:block;font-size:14px}.wpText small{display:block;font-size:10px;color:var(--muted);margin-top:3px}
+.wpTag{font-size:10px;font-weight:900;padding:6px 10px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#1a1005;animation:tagPulse 1.8s ease-in-out infinite}
+.wheelPromo.done .wpTag{background:#292b34;color:var(--muted);animation:none}.wheelPromo.done .wpIcon{animation:none;filter:grayscale(.6)}
+@keyframes tagPulse{50%{transform:scale(1.08)}}
+.backHome{border:1px solid var(--line);background:#171922;color:#fff;border-radius:12px;padding:8px 13px;font-size:11px;font-weight:850;cursor:pointer;margin:0 0 10px 3px;font-family:inherit}
+/* статистика */
+.statTabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:14px;background:#0c0d12;border:1px solid var(--line)}
+.statTabs button{border:0;background:transparent;color:var(--muted);padding:9px;border-radius:10px;font-size:11px;font-weight:850;cursor:pointer;font-family:inherit;transition:.25s}
+.statTabs button.on{background:linear-gradient(135deg,var(--gold),var(--orange));color:#1a1005}
+.statChart{display:flex;align-items:flex-end;gap:7px;height:150px;margin:18px 0 6px;padding:0 2px}
+.sBar{flex:1;min-width:0;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:5px}
+.sBar b{font-size:10px;color:#c9ccd6}.sBar i{display:block;width:100%;max-width:34px;border-radius:9px 9px 4px 4px;background:linear-gradient(180deg,#4a5064,#343949);height:var(--h);min-height:4px;transform-origin:bottom;animation:grow .7s var(--ease) both;animation-delay:calc(var(--n)*55ms)}
+.sBar.cur i{background:linear-gradient(180deg,var(--gold),var(--orange));box-shadow:0 0 14px color-mix(in srgb,var(--orange) 45%,transparent)}.sBar.hi i{background:linear-gradient(180deg,color-mix(in srgb,var(--orange) 70%,#fff),color-mix(in srgb,var(--orange) 60%,#222))}
+.sBar span{font-size:8px;color:var(--muted);white-space:nowrap}
+@keyframes grow{from{transform:scaleY(0)}}
+.statTiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.statTile{padding:11px;border-radius:14px;background:#0f1016;border:1px solid var(--line)}.statTile b{display:block;font-size:19px}.statTile span{font-size:9px;color:var(--muted);font-weight:800}
+/* ивент */
+.eventCard{position:relative;overflow:hidden;text-align:center;padding:30px 18px}
+.eventCard:before{content:"";position:absolute;inset:-40% -20% auto;height:200px;background:radial-gradient(circle,color-mix(in srgb,var(--orange) 35%,transparent),transparent 65%);animation:glowPulse 3.4s ease-in-out infinite;pointer-events:none}
+.evIcon{position:relative;font-size:64px;animation:bob 2.6s ease-in-out infinite;filter:drop-shadow(0 0 22px var(--orange))}
+.eventCard h3{position:relative;margin:8px 0 6px;font-size:26px;letter-spacing:-.5px;background:linear-gradient(90deg,#fff,var(--gold),#fff);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:txtShine 3s linear infinite}
+@keyframes txtShine{to{background-position:-200% 0}}
+.evDots{position:relative;display:flex;gap:7px;justify-content:center;margin-top:14px}.evDots i{width:9px;height:9px;border-radius:50%;background:var(--orange);animation:loaderDot 1.1s ease-in-out infinite}.evDots i:nth-child(2){animation-delay:.15s}.evDots i:nth-child(3){animation-delay:.3s}
+/* обучение */
+#onb,#inst{position:fixed;inset:0;z-index:9000;display:none;align-items:flex-end;justify-content:center;background:rgba(4,5,9,.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:14px calc(14px + env(safe-area-inset-right)) calc(14px + env(safe-area-inset-bottom)) calc(14px + env(safe-area-inset-left))}
+#onb.open,#inst.open{display:flex}
+.onbBox{width:min(440px,100%);border-radius:28px;border:1px solid #30333f;background:linear-gradient(160deg,#1a1c26,#101117);padding:26px 22px 20px;text-align:center;box-shadow:0 30px 80px #000c;animation:onbUp .5s var(--spring)}
+@keyframes onbUp{from{opacity:0;transform:translateY(60px) scale(.94)}}
+.onbIcon{font-size:68px;line-height:1;margin-bottom:12px;filter:drop-shadow(0 0 22px var(--orange));animation:bob 2.4s ease-in-out infinite}
+.onbBox h2{margin:0 0 8px;font-size:22px;letter-spacing:-.4px}.onbBox p{margin:0 auto;max-width:320px;font-size:12px;line-height:1.55;color:#aeb2bf;min-height:56px}
+.onbSlide{animation:itemIn .4s var(--ease)}
+.onbDots{display:flex;gap:6px;justify-content:center;margin:16px 0}.onbDots i{width:7px;height:7px;border-radius:99px;background:#343743;transition:.3s var(--ease)}.onbDots i.on{width:22px;background:linear-gradient(90deg,var(--gold),var(--orange))}
+.onbBtns{display:grid;gap:8px}.onbBtns .btn{width:100%}.onbSkip{background:transparent;border:0;color:var(--muted);font-size:11px;font-weight:800;padding:8px;cursor:pointer;font-family:inherit}
+.onbBtns.two{grid-template-columns:1.3fr 1fr}
+/* индикатор музыки */
+#musicToggle.on{box-shadow:0 0 14px color-mix(in srgb,var(--orange) 40%,transparent)}
+</style>
+<script>
+(function(){
+'use strict';
+function $(i){return document.getElementById(i)}
+function D(){return typeof data!=='undefined'?data:null}
+function soundOn(){var d=D();return !!(d&&d.sound)}
+var LS={get:function(k,d){try{var v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+
+/* ================= АУДИО ================= */
+var AC=null,master=null;
+function ctx(){
+  if(!AC){var C=window.AudioContext||window.webkitAudioContext;if(!C)return null;AC=new C();master=AC.createGain();master.gain.value=1;master.connect(AC.destination)}
+  if(AC.state==='suspended')AC.resume();return AC}
+function tone(f,t,dur,type,vol,dest){var o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.value=f;
+  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(g);g.connect(dest||master);o.start(t);o.stop(t+dur+.05)}
+function arp(notes,t,gap,type,vol,dur){notes.forEach(function(n,i){tone(n,t+i*gap,dur||.22,type,vol)})}
+/* общий AudioContext вместо нового на каждый звук (браузер ограничивает их число) */
+window.beep=function(type){
+  if(!soundOn())return;var c=ctx();if(!c)return;var t=c.currentTime+.005;
+  switch(type){
+    case 'level':arp([523,659,784,1047],t,.09,'sine',.09,.3);break;
+    case 'win':arp([523,659,784,1047,1319],t,.08,'triangle',.08,.35);break;
+    case 'miss':tone(220,t,.22,'sawtooth',.045);tone(165,t+.12,.3,'sawtooth',.045);break;
+    case 'coin':tone(988,t,.07,'square',.035);tone(1319,t+.07,.2,'square',.035);break;
+    case 'click':tone(1500,t,.03,'square',.012);break;
+    case 'tab':tone(520,t,.07,'sine',.05);tone(780,t+.05,.09,'sine',.05);break;
+    case 'tick':tone(1900,t,.02,'triangle',.028);break;
+    default:tone(660,t,.1,'triangle',.08);tone(880,t+.08,.14,'triangle',.08)}
+};
+/* звуки интерфейса */
+document.addEventListener('pointerdown',function(e){
+  var t=e.target.closest&&e.target.closest('.navBtn,.btn,.reward,.gameChoice,.toggle,.titleOption,.themeOption,.frameOption,.framePickerHead,.themePickerHead,.statTabs button,.wheelPromo,.backHome,.setting[onclick]');
+  if(t)window.beep(t.classList.contains('navBtn')?'tab':'click')},{passive:true});
+/* тики колеса и кейса */
+function ticks(n,ms,pow){for(var i=1;i<=n;i++)(function(i){setTimeout(function(){window.beep('tick')},ms*(1-Math.pow(1-i/n,1/pow)))})(i)}
+var wheel=$('dailyWheel');
+if(wheel)new MutationObserver(function(){if(wheel.classList.contains('spinning'))ticks(46,3200,3)}).observe(wheel,{attributes:true,attributeFilter:['class']});
+var cm=$('caseModal');
+if(cm)new MutationObserver(function(){if(cm.classList.contains('open')&&!cm._t){cm._t=1;ticks(20,2800,3);setTimeout(function(){cm._t=0},3000)}}).observe(cm,{attributes:true,attributeFilter:['class']});
+
+/* ================= МУЗЫКА (генеративная, без файлов) ================= */
+var mus={on:false,timer:0,bus:null,step:0,vol:Math.max(0,Math.min(1,parseFloat(LS.get('ogonok_music_vol','25'))/100))};
+var CH=[[57,60,64],[53,57,60],[48,52,55],[55,59,62]],BAR=3.6;
+function mf(n){return 440*Math.pow(2,(n-69)/12)}
+function bar(){
+  if(!AC||AC.state!=='running')return;
+  var t=AC.currentTime+.06,ch=CH[mus.step++%4],i,n;
+  ch.forEach(function(n,k){
+    [0,k%2?5:-5].forEach(function(det){var o=AC.createOscillator(),g=AC.createGain();o.type='triangle';o.frequency.value=mf(n);o.detune.value=det;
+      g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.035,t+1.1);g.gain.linearRampToValueAtTime(.0001,t+BAR+.5);
+      o.connect(g);g.connect(mus.bus);o.start(t);o.stop(t+BAR+.6)})});
+  tone(mf(ch[0]-24),t,BAR,'sine',.16,mus.bus);
+  for(i=0;i<8;i++)if(Math.random()<.55){n=ch[Math.floor(Math.random()*3)]+12*(1+(Math.random()<.4?1:0));tone(mf(n),t+i*BAR/8,.9,'triangle',.05,mus.bus)}
+}
+function startMusic(){
+  var c=ctx();if(!c||mus.on)return;mus.on=true;
+  mus.bus=c.createGain();mus.bus.gain.value=0;
+  var lp=c.createBiquadFilter();lp.type='lowpass';lp.frequency.value=1500;
+  var dl=c.createDelay(1),fb=c.createGain(),wet=c.createGain();dl.delayTime.value=.45;fb.gain.value=.38;wet.gain.value=.5;
+  mus.bus.connect(lp);lp.connect(master);lp.connect(dl);dl.connect(fb);fb.connect(dl);dl.connect(wet);wet.connect(master);
+  mus.bus.gain.linearRampToValueAtTime(mus.vol,c.currentTime+2.5);
+  mus.step=0;bar();mus.timer=setInterval(bar,BAR*1000)}
+function stopMusic(){
+  if(!mus.on)return;mus.on=false;clearInterval(mus.timer);var b=mus.bus;
+  if(b&&AC){b.gain.cancelScheduledValues(AC.currentTime);b.gain.setValueAtTime(b.gain.value,AC.currentTime);b.gain.linearRampToValueAtTime(0,AC.currentTime+.6);setTimeout(function(){try{b.disconnect()}catch(e){}},900)}}
+function syncMusicUI(){var t=$('musicToggle'),r=$('musicVolRow'),v=$('musicVol');if(t)t.classList.toggle('on',LS.get('ogonok_music','0')==='1');if(r)r.style.display=LS.get('ogonok_music','0')==='1'?'':'none';if(v)v.value=Math.round(mus.vol*100)}
+window.setMusic=function(on){LS.set('ogonok_music',on?'1':'0');if(on)startMusic();else stopMusic();syncMusicUI()};
+window.toggleMusic=function(){var on=LS.get('ogonok_music','0')!=='1';window.setMusic(on);if(typeof toast==='function')toast(on?'🎵 Музыка включена':'Музыка выключена')};
+var mv=$('musicVol');if(mv)mv.addEventListener('input',function(){mus.vol=mv.value/100;LS.set('ogonok_music_vol',mv.value);if(mus.bus&&AC)mus.bus.gain.setTargetAtTime(mus.vol,AC.currentTime,.05)});
+syncMusicUI();
+/* автозапуск после первого касания (браузеры запрещают звук без жеста) */
+if(LS.get('ogonok_music','0')==='1'){var go1=function(){document.removeEventListener('pointerdown',go1);startMusic()};document.addEventListener('pointerdown',go1)}
+document.addEventListener('visibilitychange',function(){if(!AC)return;if(document.hidden){AC.suspend()}else if(mus.on||soundOn()){AC.resume()}});
+
+/* ================= ГЛАВНАЯ: колесо и фраза дня ================= */
+function updateHome(){
+  var d=D();if(!d)return;
+  var spun=d.wheel&&d.wheel.last===today(),p=$('wheelPromo');
+  if(p){p.classList.toggle('done',!!spun);$('wheelPromoTag').textContent=spun?'Завтра':'Крутить';$('wheelPromoSub').textContent=spun?'Сегодня уже крутил — возвращайся завтра':'Бесплатная награда раз в день'}
+}
+
+/* ================= СТАТИСТИКА ================= */
+var mode='w',sig='';
+var MN=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
+function key(x){return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0')}
+function weeks(n){var o=[],b=new Date();b.setHours(12,0,0,0);b.setDate(b.getDate()-(b.getDay()+6)%7);
+  for(var i=n-1;i>=0;i--){var st=new Date(b);st.setDate(b.getDate()-7*i);var c=0;for(var k=0;k<7;k++){var x=new Date(st);x.setDate(st.getDate()+k);if(D().days[key(x)]===true)c++}o.push({v:c,l:st.getDate()+'.'+String(st.getMonth()+1).padStart(2,'0'),cur:i===0})}return o}
+function months(n){var o=[],now=new Date();for(var i=n-1;i>=0;i--){var m=new Date(now.getFullYear(),now.getMonth()-i,1),pre=m.getFullYear()+'-'+String(m.getMonth()+1).padStart(2,'0'),c=0;
+  for(var k in D().days)if(k.indexOf(pre)===0&&D().days[k]===true)c++;o.push({v:c,l:MN[m.getMonth()],cur:i===0})}return o}
+function renderStats(force){
+  var d=D(),ch=$('statChart');if(!d||!ch||!d.days)return;
+  var vals=Object.keys(d.days).filter(function(k){return d.days[k]===true}).length,s=vals+'|'+mode+'|'+d.best;
+  if(!force&&s===sig)return;sig=s;
+  var arr=mode==='w'?weeks(8):months(6),mx=Math.max(mode==='w'?5:20,Math.max.apply(null,arr.map(function(x){return x.v})));
+  var top=Math.max.apply(null,arr.map(function(x){return x.v}));
+  ch.innerHTML=arr.map(function(x,i){return '<div class="sBar'+(x.cur?' cur':x.v===top&&top>0?' hi':'')+'" style="--n:'+i+'"><b>'+x.v+'</b><i style="--h:'+Math.round(x.v/mx*100*.78)+'%"></i><span>'+x.l+'</span></div>'}).join('');
+  $('statsHint').textContent=mode==='w'?'по неделям':'по месяцам';
+  var last=0,school=0,t=new Date();t.setHours(12);
+  for(var i=0;i<30;i++){var x=new Date(t);x.setDate(t.getDate()-i);var wd=x.getDay();if(wd!==0&&wd!==6){school++;if(d.days[key(x)]===true)last++}}
+  var w4=weeks(4),avg=(w4.reduce(function(a,b){return a+b.v},0)/4).toFixed(1).replace('.0','');
+  $('statTiles').innerHTML=[[vals,'ВСЕГО ДНЕЙ'],[school?Math.round(last/school*100)+'%':'0%','ПОСЕЩАЕМОСТЬ · 30 ДН.'],[avg,'В СРЕДНЕМ ЗА НЕДЕЛЮ'],[d.best||0,'ЛУЧШАЯ СЕРИЯ']].map(function(r){return '<div class="statTile"><b>'+r[0]+'</b><span>'+r[1]+'</span></div>'}).join('');
+}
+window.statMode=function(m){mode=m;$('stW').classList.toggle('on',m==='w');$('stM').classList.toggle('on',m==='m');renderStats(true)};
+
+/* ================= ОБУЧЕНИЕ ================= */
+var SL=[['🔥','Добро пожаловать!','Учебный огонёк — это игра про привычку учиться. Каждый день отмечайся, и твоя серия будет расти.'],
+ ['✅','Отмечайся каждый день','Нажимай «Я пошёл сегодня» на главной. Выходные считать не нужно, а если пропустил — серию можно восстановить.'],
+ ['⚔️','Квесты и магазин','Выполняй задания, получай XP и монеты, а потом трать их на титулы, рамки, неон и кейсы.'],
+ ['🎮','Игры и колесо','Играй в мини-игры за монеты. А колесо фортуны на главной даёт бесплатную награду раз в день.'],
+ ['🎵','Звук и музыка','Хочешь спокойную фоновую музыку? Её можно включить сейчас или потом в настройках.']];
+var onbI=0,onb=document.createElement('div');onb.id='onb';document.body.appendChild(onb);
+function drawOnb(){var s=SL[onbI],last=onbI===SL.length-1;
+  onb.innerHTML='<div class="onbBox"><div class="onbSlide" id="onbS"><div class="onbIcon">'+s[0]+'</div><h2>'+s[1]+'</h2><p>'+s[2]+'</p></div><div class="onbDots">'+SL.map(function(_,i){return '<i class="'+(i===onbI?'on':'')+'"></i>'}).join('')+'</div><div class="onbBtns'+(last?' two':'')+'">'+
+  (last?'<button class="btn yes" onclick="closeOnb(true)">🎵 Включить</button><button class="btn no" onclick="closeOnb(false)">Без музыки</button>':'<button class="btn yes" onclick="nextOnb()">Дальше →</button>')+'</div>'+(last?'':'<button class="onbSkip" onclick="closeOnb()">Пропустить</button>')+'</div>'}
+window.openOnb=function(){onbI=0;drawOnb();onb.classList.add('open')};
+window.nextOnb=function(){onbI++;drawOnb()};
+window.closeOnb=function(music){onb.classList.remove('open');LS.set('ogonok_onb','1');if(music===true)window.setMusic(true);else if(music===false)window.setMusic(false)};
+(function(){var d=D();if(LS.get('ogonok_onb','')!=='1'){if(d&&(Object.keys(d.days||{}).length||d.xp>0||d.coins>0))LS.set('ogonok_onb','1');else setTimeout(window.openOnb,1200)}})();
+
+/* ================= СВЯЗКА ================= */
+var _g=window.go;window.go=function(p,b){_g(p,b);if(p==='profile')renderStats(true);if(p==='home')updateHome()};
+if(typeof window.render==='function'){var _r=window.render;window.render=function(){var r=_r.apply(this,arguments);try{updateHome();renderStats(false)}catch(e){}return r}}
+updateHome();renderStats(true);
+})();
+</script>
+
+<style id="uiPlus4">
+/* ===== v4: единый визуальный стиль ===== */
+:root{--btn-grad:linear-gradient(135deg,color-mix(in srgb,var(--orange) 70%,#fff 30%),var(--orange));--cardbg:linear-gradient(160deg,#1b1d28,#12131a);--bd:#ffffff14;--hl:inset 0 1px 0 #ffffff14}
+body{-webkit-font-smoothing:antialiased;letter-spacing:-.005em}::selection{background:color-mix(in srgb,var(--orange) 45%,transparent)}
+body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(520px 380px at 88% 6%,color-mix(in srgb,var(--orange) 15%,transparent),transparent 70%),radial-gradient(460px 340px at 6% 72%,color-mix(in srgb,var(--gold) 8%,transparent),transparent 70%);animation:ambient 18s ease-in-out infinite alternate}
+@keyframes ambient{to{transform:translate3d(-24px,18px,0) scale(1.08)}}
+/* шапка */
+.brandIcon{position:relative;overflow:hidden;box-shadow:0 10px 30px color-mix(in srgb,var(--orange) 40%,transparent),inset 0 1px 0 #ffffff55}
+.brandIcon:after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,#ffffff55 50%,transparent 65%);transform:translateX(-120%);animation:btnShine 5s ease-in-out infinite}
+.brand h1{font-size:23px;background:linear-gradient(180deg,#fff,#c9ccd8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.profileMini{background:var(--cardbg);box-shadow:var(--hl),0 6px 16px #0006;border-color:var(--bd)}
+/* карточки */
+.card,.mini,.reward,.badge,.gameChoice,.wheelPrize,.statTile{background:var(--cardbg);border:1px solid var(--bd);box-shadow:var(--hl),0 10px 28px #0005}
+.card{border-radius:24px}.mini{border-radius:20px;position:relative;overflow:hidden}.mini:before{content:"";position:absolute;left:18%;right:18%;top:0;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--orange),transparent);opacity:.7}
+.mini b{font-size:23px;letter-spacing:-.5px}.mini span{letter-spacing:.8px;font-weight:800}
+.sectionHead{margin:24px 3px 10px}.sectionHead h2{font-size:17px;letter-spacing:-.3px}
+.sectionHead span{background:#ffffff0c;border:1px solid #ffffff10;padding:4px 9px;border-radius:99px;font-size:10px;font-weight:700;color:#aeb2c0}
+.sectionHead span .coin,.sectionHead span b{font-weight:900}
+/* герой */
+.hero{border-radius:32px;border-color:#ffffff1c;box-shadow:0 26px 60px #000a,0 0 0 1px color-mix(in srgb,var(--orange) 14%,transparent),inset 0 1px 0 #ffffff1c}
+.hero:after{content:"";position:absolute;inset:-70%;z-index:0;background:conic-gradient(from 0deg,transparent 0 72%,color-mix(in srgb,var(--orange) 20%,transparent) 86%,transparent);animation:ogSpin 16s linear infinite;pointer-events:none}
+.hero:before{z-index:0}.hero>*:not(.ember){z-index:1}
+@keyframes ogSpin{to{transform:rotate(360deg)}}
+.rank{background:linear-gradient(145deg,#ffffff12,#ffffff06);border-color:#ffffff1f;color:#ffd7b4;backdrop-filter:none}
+.label{letter-spacing:.3px}
+.heroTop{color:color-mix(in srgb,var(--gold) 80%,#fff)}
+/* кнопки */
+.btn{border-radius:18px;padding:15px 12px;font-weight:850;letter-spacing:.15px;font-family:inherit;transition:transform .18s var(--ease),box-shadow .25s,filter .2s}
+.yes,.primary,.btn.primary{background:var(--btn-grad);color:#fff;text-shadow:0 1px 2px #0004;box-shadow:0 12px 28px color-mix(in srgb,var(--orange) 36%,transparent),inset 0 1px 0 #ffffff59,inset 0 -3px 0 #00000024}
+body[data-theme] .yes{text-shadow:0 1px 2px #0004;box-shadow:0 12px 28px color-mix(in srgb,var(--orange) 36%,transparent),inset 0 1px 0 #ffffff59,inset 0 -3px 0 #00000024}
+.primary{border:0;border-radius:16px}
+.no,.btn.no{background:linear-gradient(160deg,#2b2d39,#1d1f28);border:1px solid var(--bd);box-shadow:var(--hl),0 8px 20px #0005;color:#d6d8e2}
+.btn:disabled,.primary:disabled{filter:grayscale(.7) brightness(.7);box-shadow:none;cursor:not-allowed}
+@media(hover:hover){.btn:hover,.primary:hover{filter:brightness(1.08)}}
+.restore{width:100%;margin-top:10px;padding:10px;border:1px dashed color-mix(in srgb,var(--orange) 40%,transparent);border-radius:14px;background:color-mix(in srgb,var(--orange) 6%,transparent);color:color-mix(in srgb,var(--gold) 80%,#fff);font-family:inherit;transition:.2s}
+.restore:active{transform:scale(.98)}.restore:disabled{border-color:#ffffff12;background:transparent;color:#5d6170}
+.profileEdit button,.bannerUploadRow button,.profileEditBtn{font-family:inherit;border-radius:14px}
+.profileEdit button:not(.primary),.bannerUploadRow .profileEditBtn:not(:first-child){background:linear-gradient(160deg,#2b2d39,#1d1f28);border:1px solid var(--bd);color:#e6e8f0;padding:11px 14px;font-weight:850}
+.framePickerHead,.themePickerHead,.backHome{background:linear-gradient(160deg,#242632,#191b24);border-color:var(--bd);box-shadow:var(--hl);font-family:inherit;border-radius:16px}
+.themeOption,.titleOption,.frameOption{border-color:var(--bd);background:linear-gradient(160deg,#1e202b,#161820)}
+.pill{border-radius:99px;padding:5px 10px;background:color-mix(in srgb,var(--orange) 14%,#1a1b22);border-color:color-mix(in srgb,var(--orange) 35%,transparent);color:color-mix(in srgb,var(--gold) 80%,#fff)}
+/* прогресс */
+.bar,.seasonBar{height:10px;background:#0b0c11;border:1px solid #ffffff0d;box-shadow:inset 0 2px 4px #000a}.bar i{background:linear-gradient(90deg,var(--orange),var(--gold));box-shadow:0 0 14px color-mix(in srgb,var(--orange) 55%,transparent)}
+.questProgress{height:6px;background:#0b0c11;box-shadow:inset 0 1px 3px #000a}
+/* переключатели и поля */
+.toggle{width:50px;height:29px;background:#2b2d38;box-shadow:inset 0 2px 5px #0008;transition:background .25s,box-shadow .25s}
+.toggle i{width:23px;height:23px;top:3px;left:3px;box-shadow:0 3px 8px #0007;transition:left .28s var(--spring)}
+.toggle.on{background:var(--btn-grad);box-shadow:inset 0 1px 0 #ffffff44,0 0 16px color-mix(in srgb,var(--orange) 40%,transparent)}.toggle.on i{left:24px}
+input[type=text],input:not([type]),input[type=password],input[type=number]{transition:border-color .2s,box-shadow .2s}
+input:focus{outline:none;border-color:var(--orange)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--orange) 22%,transparent)!important}
+.setting{padding:14px 0}.sicon{background:linear-gradient(160deg,#2a2c38,#1e2029);border:1px solid var(--bd);border-radius:14px}
+/* навигация */
+.nav{padding:0 12px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent,#08090dd9 45%)}
+.navInner{border-radius:28px;background:rgba(17,18,26,.86);border:1px solid #ffffff17;box-shadow:0 18px 44px #000b,inset 0 1px 0 #ffffff12;padding:6px}
+.navBtn{position:relative;font-size:9px;font-family:inherit;padding:8px 2px 9px;color:#7a7e8c}.navBtn .ni{font-size:20px;line-height:22px;margin-bottom:3px;transition:transform .3s var(--spring)}
+.navBtn.active{background:linear-gradient(160deg,color-mix(in srgb,var(--orange) 22%,#1c1d27),#1c1d27);box-shadow:inset 0 1px 0 #ffffff14,0 6px 18px color-mix(in srgb,var(--orange) 20%,transparent)}
+.navBtn.active .ni{transform:translateY(-1px) scale(1.1)}
+.navBtn.active:after{content:"";position:absolute;bottom:3px;left:50%;width:14px;height:3px;border-radius:3px;background:var(--orange);transform:translateX(-50%);box-shadow:0 0 8px var(--orange)}
+/* модалки */
+.aboutBox,.milestoneBox,.purchaseBox,.caseBox,.customTitleBox,.loaderBox{background:linear-gradient(160deg,#1d1f2a,#12131a);border:1px solid #ffffff1c;box-shadow:0 30px 80px #000c,inset 0 1px 0 #ffffff14;border-radius:28px}
+.aboutCloseBtn{background:var(--btn-grad);box-shadow:0 12px 28px color-mix(in srgb,var(--orange) 34%,transparent),inset 0 1px 0 #ffffff55;font-family:inherit}
+.toast{background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-radius:16px}
+/* игры, квесты, ачивки */
+.gameChoice{border-radius:20px;font-family:inherit}.gameChoice:active{transform:scale(.97)}
+.questIcon{background:linear-gradient(160deg,color-mix(in srgb,var(--orange) 16%,#20222c),#171922);border:1px solid var(--bd);border-radius:15px}
+.badge.earned{background:linear-gradient(160deg,color-mix(in srgb,var(--orange) 16%,#20222c),#171922);border-color:color-mix(in srgb,var(--orange) 40%,transparent)}
+.achievementProgress{background:linear-gradient(160deg,#171922,#101116);border-color:var(--bd)}
+.day{border-radius:11px}.day.ok{box-shadow:0 4px 14px color-mix(in srgb,var(--orange) 30%,transparent),inset 0 1px 0 #ffffff44}
+.avatar{box-shadow:0 14px 36px color-mix(in srgb,var(--orange) 35%,transparent),inset 0 1px 0 #ffffff55}
+.statTabs{background:#0b0c11}
+::-webkit-scrollbar{width:0;height:0}
+@media(prefers-reduced-motion:reduce){body:before,.hero:after,.brandIcon:after{animation:none!important}}
+</style>
+
+<style id="uiPlus5">
+.installCard{position:relative;display:flex;align-items:center;gap:11px;margin-top:10px;padding:13px 40px 13px 13px;border-radius:20px;border:1px solid color-mix(in srgb,var(--orange) 40%,#292c38);background:radial-gradient(circle at 0 0,color-mix(in srgb,var(--orange) 20%,transparent),transparent 60%),var(--cardbg);box-shadow:var(--hl),0 10px 28px #0005;animation:itemIn .5s var(--ease)}
+.icIcon{font-size:28px}.icText{flex:1;min-width:0}.icText b{display:block;font-size:13px}.icText small{display:block;font-size:10px;color:var(--muted);margin-top:2px;line-height:1.35}
+.installCard .btn{padding:10px 12px;font-size:12px;border-radius:14px;flex:none}
+.icClose{position:absolute;top:6px;right:6px;width:28px;height:28px;border:0;border-radius:50%;background:#ffffff0d;color:#9a9eac;font-size:12px;cursor:pointer}
+.stepList{text-align:left;max-width:320px;margin:4px auto 0;display:grid;gap:9px}.stepList div{display:flex;gap:10px;align-items:center;font-size:12px;line-height:1.4;color:#c4c8d4}.stepList b{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--btn-grad);color:#fff;font-size:12px}
+</style>
+<script>
+(function(){
+'use strict';
+function $(i){return document.getElementById(i)}
+function D(){return typeof data!=='undefined'?data:null}
+function say(t){if(typeof toast==='function')toast(t)}
+var LS={get:function(k,d){try{var v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+
+/* ========== ХРАНИЛКА ДЛЯ SERVICE WORKER (он не видит localStorage) ========== */
+function idb(){return new Promise(function(res,rej){var r=indexedDB.open('ogonok-rem',1);r.onupgradeneeded=function(){r.result.createObjectStore('kv')};r.onsuccess=function(){res(r.result)};r.onerror=function(){rej(r.error)}})}
+function kvSet(k,v){return idb().then(function(db){return new Promise(function(res){var t=db.transaction('kv','readwrite');t.objectStore('kv').put(v,k);t.oncomplete=function(){res()};t.onerror=function(){res()}})}).catch(function(){})}
+function kvGet(k){return idb().then(function(db){return new Promise(function(res){var q=db.transaction('kv').objectStore('kv').get(k);q.onsuccess=function(){res(q.result)};q.onerror=function(){res()}})}).catch(function(){})}
+
+/* ========== НАПОМИНАНИЯ ========== */
+var supported=typeof Notification!=='undefined';
+function granted(){return supported&&Notification.permission==='granted'}
+function remTime(){return LS.get('ogonok_rem_time','17:00')}
+function markedToday(){var d=D();return !!(d&&d.days&&d.days[today()]!==undefined)}
+function syncCfg(){var d=D();if(!d)return;kvSet('cfg',{enabled:!!d.notify&&granted(),time:remTime(),lastMarked:markedToday()?today():''})}
+var syncT;function syncSoon(){clearTimeout(syncT);syncT=setTimeout(syncCfg,700)}
+function showNote(title,body){
+  if(!granted())return;
+  var o={body:body,icon:'./icon.png',badge:'./icon.png',tag:'ogonok-daily',data:{url:'./'}};
+  (navigator.serviceWorker&&navigator.serviceWorker.ready?navigator.serviceWorker.ready.then(function(r){return r.showNotification(title,o)}):Promise.reject()).catch(function(){try{new Notification(title,o)}catch(e){}})}
+function registerPeriodic(){try{navigator.serviceWorker.ready.then(function(r){if(r.periodicSync)return r.periodicSync.register('ogonok-reminder',{minInterval:3*3600*1000})}).catch(function(){})}catch(e){}}
+function remUI(){
+  var d=D(),on=!!(d&&d.notify),row=$('remRow'),h=$('remHint'),b=$('remTest'),tg=$('notifyToggle');
+  if(tg)tg.classList.toggle('on',on);
+  if(row)row.style.display=on?'':'none';
+  if(!supported){if(h)h.textContent='В этом браузере недоступно — установи приложение на главный экран';if(b)b.style.display='none'}
+  else if(Notification.permission==='denied'){if(h)h.textContent='Уведомления заблокированы — разреши их в настройках браузера';if(b)b.style.display='none'}
+  else{if(h)h.textContent=granted()?'Только в учебные дни, если не отметился':'Нажми «Разрешить», чтобы получать уведомления';if(b){b.style.display='';b.textContent=granted()?'Проверить':'Разрешить'}}
+  var t=$('remTime');if(t)t.value=remTime()}
+function askPerm(){if(!supported)return Promise.resolve('unsupported');return Notification.requestPermission().then(function(p){remUI();syncCfg();if(p==='granted')registerPeriodic();return p})}
+window.toggleNotify=function(){
+  var d=D(),on=!d.notify;d.notify=on;save();remUI();syncCfg();
+  if(!on){say('Напоминания выключены');return}
+  if(!supported){say('📲 Уведомления работают в установленном приложении');return}
+  if(Notification.permission==='default')askPerm().then(function(p){say(p==='granted'?'🔔 Напоминания включены':'Разреши уведомления в настройках браузера')});
+  else if(Notification.permission==='denied')say('Уведомления заблокированы в настройках браузера');
+  else{registerPeriodic();say('🔔 Напоминания включены')}};
+function bindRem(){
+  var t=$('remTime'),b=$('remTest');
+  if(t)t.addEventListener('change',function(){if(/^\d\d:\d\d$/.test(t.value)){LS.set('ogonok_rem_time',t.value);syncCfg();say('⏰ Напомним в '+t.value)}});
+  if(b)b.addEventListener('click',function(){
+    if(granted()){showNote('Учебный огонёк 🔥','Так выглядит напоминание. Не забудь отметиться сегодня!');say('🔔 Отправили тестовое уведомление')}
+    else askPerm().then(function(p){if(p==='granted'){showNote('Учебный огонёк 🔥','Отлично! Теперь напоминания будут приходить.');say('🔔 Готово')}})})}
+function check(){
+  var d=D();if(!d||!d.notify||!isSchoolDay()||markedToday())return;
+  var n=new Date(),p=remTime().split(':'),t=today();
+  if(n.getHours()*60+n.getMinutes()<(+p[0])*60+(+p[1]))return;
+  kvGet('sent').then(function(s){if(s===t)return;kvSet('sent',t);
+    if(granted())showNote('Учебный огонёк 🔥','Ты ещё не отметился сегодня — серия ждёт тебя!');
+    else say('🔥 Ты ещё не отметился сегодня')})}
+setInterval(check,60000);
+document.addEventListener('visibilitychange',function(){if(!document.hidden){check();syncCfg()}});
+
+/* ========== УСТАНОВКА ПРИЛОЖЕНИЯ ========== */
+var deferred=null,ua=navigator.userAgent||'';
+var isIOS=/iphone|ipad|ipod/i.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1);
+function standalone(){return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}
+function snoozed(){return Date.now()<parseInt(LS.get('ogonok_inst_snooze','0'),10)}
+function removeCard(){var c=$('installCard');if(c)c.remove()}
+function showInstall(){
+  if(standalone()||snoozed()||$('installCard')||LS.get('ogonok_onb','')!=='1')return;
+  if(!deferred&&!isIOS)return;
+  var host=document.querySelector('#home .miniStats');if(!host)return;
+  var c=document.createElement('div');c.className='installCard';c.id='installCard';
+  c.innerHTML='<span class="icIcon">📲</span><div class="icText"><b>Установи приложение</b><small>Откроется как настоящее, а напоминания будут надёжнее</small></div><button class="btn yes" onclick="installApp()">Установить</button><button class="icClose" onclick="dismissInstall()" aria-label="Закрыть">✕</button>';
+  host.after(c)}
+window.dismissInstall=function(){LS.set('ogonok_inst_snooze',String(Date.now()+7*864e5));removeCard()};
+var sheet=document.createElement('div');sheet.id='inst';sheet.onclick=function(e){if(e.target===sheet)closeInst()};document.body.appendChild(sheet);
+function openInst(){
+  var steps=isIOS?['Нажми «Поделиться» ⬆️ внизу Safari','Выбери «На экран “Домой”»','Нажми «Добавить» — готово!']:['Открой меню браузера ⋮','Выбери «Установить приложение» или «Добавить на главный экран»','Подтверди — иконка появится на экране'];
+  sheet.innerHTML='<div class="onbBox"><div class="onbIcon">📲</div><h2>Установка приложения</h2><div class="stepList">'+steps.map(function(t,i){return '<div><b>'+(i+1)+'</b><span>'+t+'</span></div>'}).join('')+'</div><div class="onbBtns" style="margin-top:18px"><button class="btn yes" onclick="closeInst()">Понятно</button></div></div>';
+  sheet.classList.add('open')}
+window.closeInst=function(){sheet.classList.remove('open')};
+window.installApp=function(){
+  if(standalone()){say('✅ Приложение уже установлено');return}
+  if(deferred){var e=deferred;deferred=null;e.prompt();e.userChoice.then(function(r){if(r&&r.outcome==='accepted')say('🎉 Установлено!');removeCard()}).catch(function(){})}
+  else openInst()};
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferred=e;setTimeout(showInstall,2500)});
+window.addEventListener('appinstalled',function(){deferred=null;removeCard();var r=$('installRow');if(r)r.style.display='none';say('🎉 Приложение установлено!')});
+if(standalone()){var ir=$('installRow');if(ir)ir.style.display='none'}
+if(typeof window.closeOnb==='function'){var _c=window.closeOnb;window.closeOnb=function(){var r=_c.apply(this,arguments);setTimeout(showInstall,1800);return r}}
+setTimeout(showInstall,4000);
+
+/* ========== СВЯЗКА ========== */
+bindRem();remUI();syncCfg();check();
+if(typeof window.render==='function'){var _r=window.render;window.render=function(){var r=_r.apply(this,arguments);try{remUI();syncSoon()}catch(e){}return r}}
+})();
+</script>
+</body></html>
